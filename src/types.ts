@@ -1,3 +1,7 @@
+
+import { R2Bucket } from "@cloudflare/workers-types"
+ 
+
 export type Env = {
     [K in `BUCKET_${string}`]: R2Bucket;
 };
