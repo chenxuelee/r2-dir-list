@@ -1,5 +1,6 @@
 import { svgs, cssStyle, defaultFavicon } from './static';
 import { SiteConfig } from './types';
+import { R2Object, console } from '@cloudflare/workers-types';
 
 export var renderTemplFull = (files: R2Object[], folders: string[], path: string, config: SiteConfig) => {
     return `<!DOCTYPE html>
