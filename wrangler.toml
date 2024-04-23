@@ -1,5 +1,5 @@
 name = "r2-dir-list"
-main = "src/index.js"
+main = "src/index.tsx"
 compatibility_date = "2024-04-05"
 workers_dev = false
 
