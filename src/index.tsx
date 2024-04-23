@@ -17,6 +17,8 @@ import { prettyJSON } from 'hono/pretty-json';
 
 
 
+
+
 /**
  * 
  *  Rewrite app with Hono.
@@ -62,31 +64,82 @@ import { prettyJSON } from 'hono/pretty-json';
 const app = new Hono()
 
 
+app.use(logger());
+
+
+
+const Head: FC = memo(() => {
+  return (
+    <head>
+      <title>Hello Hono!</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+      <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+  );
+})
+
+
+
+
+
+
+const Footer: FC = memo(() => {
+  return (
+    <>
+      <footer>
+        <p>
+          Powered by <a href="https://github.com/cmj2002/r2-dir-list">r2-dir-list</a>
+        </p>
+      </footer>
+    </>
+  );
+});
+
 const Layout: FC = (props) => {
-    return (
-      <html>
-        <body>{props.children}</body>
-      </html>
-    )
-  }
-  
-  const Top: FC<{ messages: string[] }> = (props: { messages: string[] }) => {
-    return (
-      <Layout>
-        <h1>Hello Hono!</h1>
-        <ul>
-          {props.messages.map((message) => {
-            return <li>{message}!!</li>
-          })}
-        </ul>
-      </Layout>
-    )
-  }
-  
-  app.get('/', (c) => {
-    const messages = ['Good Morning', 'Good Evening', 'Good Night']
-    return c.html(<Top messages={messages} />)
-  })
+  return (
+    <html>
+      <Head />
+      <body>{props.children}</body>
+    </html>
+  )
+}
+
+const Top: FC = () => {
+  return (
+    <Layout>
+      <div className="container  mx-auto p-5 flex  h-96">
+
+      <div className="text-sm breadcrumbs flex-none">
+  <ul>
+    <li><a>Home</a></li> 
+    <li><a>Documents</a></li> 
+    <li>Add Document</li>
+  </ul>
+</div>
+        <div className="flex-1">
+        <h1>
+        Good Man.  
+        </h1>    
+        </div>
+
+        <div className="flex-1">
+        <h1>
+        Good Man.  
+        </h1>    
+        </div>
+
+      </div>
+      <Footer />
+    </Layout>
+  )
+}
+
+app.get('/', (c) => {
+  const messages = ['Good Morning', 'Good Evening', 'Good Night']
+  return c.html(<Top />)
+})
 //...
 
 export default app // for Cloudflare Workers or Bun
