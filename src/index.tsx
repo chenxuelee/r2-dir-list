@@ -11,6 +11,8 @@ const Head: FC = () => {
   return <head>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"></link>
     <title>R2-Dir-List</title>
   </head>
 }
@@ -46,6 +48,12 @@ app.use(logger())
 
 app.get('/', (c) => {
   return c.html(<Home />)
+})
+
+
+app.get('/css/styles.css', (c) => {
+  c.header('Content-Type', 'text/css')
+  return c.text('body { background-color: red; }')
 })
 
 export default app
