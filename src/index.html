@@ -15,7 +15,7 @@
 <style>
 body * {
   outline: 1px solid red; 
-  margin: 10px;
+  margin: 5px;
 }
 </style>
 </head>
@@ -23,11 +23,65 @@ body * {
 
 
 
-<body class="">
+<body class="flex flex-col">
 
-    <div class="skeleton w-32 h-32"></div>
-    <div class="skeleton w-32 h-32"></div>
-    <div class="skeleton w-32 h-32"></div>
+    <div class="skeleton  h-16 flex justify-center items-center">
+    <h1 class="text-5xl ">
+        Header section
+    </h1>
+    </div>
+    <div class="skeleton   flex min-h-32	">
+        <div class="w-1/12 skeleton  hidden sm:flex">
+
+        </div>
+
+        <div class="flex-1 skeleton h-80 flex flex-col">
+            <div class="text-sm breadcrumbs">
+                <ul>
+                  <li>
+                    <a>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                      Home
+                    </a>
+                  </li> 
+                  <li>
+                    <a>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                      Documents
+                    </a>
+                  </li> 
+                </ul>
+              </div>
+        <div class="grid grid-cols-4 gap-4">
+            <div>1</div>
+            <div>2</div>
+            <div class="hidden">3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+
+
+
+
+        </div>
+
+        </div>
+
+        <div class="w-1/12 skeleton hidden sm:flex ">
+
+        </div>
+
+
+    </div>
+    
+        <footer class="footer footer-center p-4 bg-base-300 text-xl skeleton">
+            <aside>
+                <p>Powered by <a class="text-blue-600" href="https://github.com/cmj2002/r2-dir-list">r2-dir-list</a></p>
+            </aside>
+          </footer>
+          
     
 </body>
 
