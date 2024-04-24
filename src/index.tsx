@@ -46,6 +46,15 @@ const Home: FC = () => {
 app.use(logger())
 
 
+app.post('/api/query/', async (c) => {
+
+  const body = await c.req.json()
+  console.log(body)
+  body.email="@1024"
+   return c.json(body)
+})
+
+
 app.get('/', (c) => {
   return c.html(<Home />)
 })
