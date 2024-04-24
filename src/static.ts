@@ -3,18 +3,13 @@ const cssStyles = `
 
 
 
-
-
-
-
 `
 
 
 
 
-const base64clientJS = "aW1wb3J0IHsgaCwgQ29tcG9uZW50LCByZW5kZXIgfSBmcm9tICdodHRwczovL2VzbS5zaC9wcmVhY3QnOwogIGltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly9lc20uc2gvaHRtJzsKCiAgLy8g5Li6IFByZWFjdCDliJ3lp4vljJYgaHRtCiAgY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKICBmdW5jdGlvbiBBcHAgKHByb3BzKSB7CiAgICByZXR1cm4gaHRtbGA8aDE+SGVsbG8gJHtwcm9wcy5uYW1lfSE8L2gxPmA7CiAgfQoKICByZW5kZXIoaHRtbGA8JHtBcHB9IG5hbWU9IldvcmxkIiAvPmAsIGRvY3VtZW50LmJvZHkpOw=="
 
-const clientJs = atob(base64clientJS)
+const clientJs = ``
 
 
 
