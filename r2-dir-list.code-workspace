@@ -3,5 +3,10 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"editor.quickSuggestions": {
+			"strings": "on"
+		}
+	}
 }
