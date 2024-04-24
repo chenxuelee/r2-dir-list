@@ -71,7 +71,7 @@ app.get("/home/", (c) => {
 <script type="module" src="/client.js"></script>
 </head>
 <body>
-
+<div id="root"></div>
 </body>
 </html>
 

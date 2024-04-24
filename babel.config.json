@@ -1,0 +1,15 @@
+{
+    "presets": ["@babel/preset-env"],
+
+        "plugins": [
+          [
+            "@babel/plugin-transform-react-jsx",
+            {
+              "throwIfNamespace": false, // defaults to true
+              "runtime": "automatic", // defaults to classic
+              "importSource": "hono/jsx" // defaults to react
+            }
+          ]
+        ]
+      
+}

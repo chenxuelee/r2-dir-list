@@ -11,36 +11,11 @@ const cssStyles = `
 
 
 
-const clientJs =`
 
-import { useState } from 'hono/jsx'
-import { render } from 'hono/jsx/dom'
+const base64clientJS = "aW1wb3J0IHsgaCwgQ29tcG9uZW50LCByZW5kZXIgfSBmcm9tICdodHRwczovL2VzbS5zaC9wcmVhY3QnOwogIGltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly9lc20uc2gvaHRtJzsKCiAgLy8g5Li6IFByZWFjdCDliJ3lp4vljJYgaHRtCiAgY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKICBmdW5jdGlvbiBBcHAgKHByb3BzKSB7CiAgICByZXR1cm4gaHRtbGA8aDE+SGVsbG8gJHtwcm9wcy5uYW1lfSE8L2gxPmA7CiAgfQoKICByZW5kZXIoaHRtbGA8JHtBcHB9IG5hbWU9IldvcmxkIiAvPmAsIGRvY3VtZW50LmJvZHkpOw=="
 
-function Counter() {
-  const [count, setCount] = useState(0)
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
-  )
-}
-
-function App() {
-  return (
-    <html>
-      <body>
-        <Counter />
-      </body>
-    </html>
-  )
-}
-
-const root = document.getElementById('root')
-render(<App />, root)
-
-`
+const clientJs = atob(base64clientJS)
 
 
 
-export {cssStyles, clientJs}
+export { cssStyles, clientJs }

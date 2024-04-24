@@ -7,11 +7,13 @@
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "post": "postcss input.css -o src/output.css ",
-    "build": "esbuild src/client.js --bundle --outfile=lib/out.js"
+    "build": "esbuild src/client.tsx --bundle --outfile=lib/out.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.4",
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
+    "@babel/preset-env": "^7.24.4",
     "@cloudflare/workers-types": "^4.20230419.0",
     "autoprefixer": "^10.4.19",
     "daisyui": "latest",
