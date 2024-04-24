@@ -1,18 +1,3 @@
-const cssStyles = `
-
-
-
-
-
-
-
-
-`
-
-
-
-const clientJs =`
-
 import { useState } from 'hono/jsx'
 import { render } from 'hono/jsx/dom'
 
@@ -28,19 +13,9 @@ function Counter() {
 
 function App() {
   return (
-    <html>
-      <body>
         <Counter />
-      </body>
-    </html>
   )
 }
 
 const root = document.getElementById('root')
 render(<App />, root)
-
-`
-
-
-
-export {cssStyles, clientJs}

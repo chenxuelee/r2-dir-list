@@ -4,6 +4,10 @@ import type { FC } from "hono/jsx"
 
 import { memo } from "hono/jsx";
 
+import { cssStyles } from "./static";
+
+import { clientJs } from "./static";
+
 
 const app = new Hono()
 
@@ -45,6 +49,37 @@ const Home: FC = () => {
 
 app.use(logger())
 
+
+app.get("/client.js", (c) => {
+
+  c.header('Content-Type', 'text/javascript')
+
+return c.body(clientJs)
+
+})
+
+
+app.get("/home/", (c) => {
+
+  const html= `
+  
+<!DOCTYPE html >
+<html>
+<head>
+<meta charset=utf-8" />
+<title>统计包含“a”或“A”的字符串的个数</title>
+<script type="module" src="/client.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+  `
+
+  return c.html(html)
+})
 
 app.post('/api/query/', async (c) => {
 
