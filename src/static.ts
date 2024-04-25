@@ -1,8 +1,7 @@
 const cssStyles = `
-
-
-
-
+body * {
+    outline: 1px solid red
+}
 `
 
 
