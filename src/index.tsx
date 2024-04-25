@@ -86,7 +86,7 @@ const Head:FC  = (props: Props) => {
 
 
 const Body:FC  = (props: Props) => {
-  return <body className="md:mx-5 mt-5 flex flex-col items-start	 gap-2">
+  return <body className="md:mx-5 mt-5 flex flex-col items-start	 gap-2  min-h-full">
 
     
 {props.children}
@@ -106,6 +106,13 @@ return <html lang="en-US">
 
 
 
+
+
+const Footer:FC = (props: Props) => {
+  return <footer className="bg-gray-800 text-white p-5 text-center ">
+    <p>© 2022 Cloudflare, Inc. All rights reserved.</p>
+  </footer>
+}
 
 async function listBucket(bucket: R2Bucket, options?: R2ListOptions): Promise<R2Objects> {
   // List all objects in the bucket, launch new request if list is truncated
@@ -164,13 +171,13 @@ return c.html(
 </nav>
 
 
-<div className=" w-full h-24">
+<div className=" w-full min-h-96">
 
 </div>
 
 
-<div className="w-full h-24">
-
+<div className="w-full  flex flex-1 justify-end flex-col mb-8">
+<Footer />
 </div>
 
 </Body>
