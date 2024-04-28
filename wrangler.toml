@@ -17,3 +17,13 @@ bucket_name = "monolibrary"
 [vars]
 PASSWORD = "19881207"
 USERNAME = "chenxuelee"
+AUTH_SECRET= "20241988"
+
+AUTH_GITHUB_ID = "1baede0f8bee25b11c38"
+AUTH_GITHUB_SECRET = "wwuufgw"
+
+
+
+
+
+
