@@ -6,14 +6,18 @@ import { logger } from "hono/logger"
 import type { FC } from "hono/jsx"
 
 import { R2Bucket, R2ListOptions, R2Objects, R2Object } from "@cloudflare/workers-types"
-
-
 import { memo } from "hono/jsx";
 import { Props } from "hono/dist/types/jsx/base";
-import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
-import { css, cx, keyframes, Style } from 'hono/css'
 
-import { cssStyles } from "./static";
+
+import { createContext, useContext } from 'hono/jsx'
+
+import { NotFound } from "./components"
+
+// import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
+// import { css, cx, keyframes, Style } from 'hono/css'
+
+// import { cssStyles } from "./static";
 
 // import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
@@ -40,87 +44,44 @@ app.use("*", logger())
 
 
 
-var cleanTitle = (path: string) => {
-  var parts = path.split("/")
-  // remove the empty strings
-  parts = parts.filter((part) => part !== "")
-  return parts[parts.length - 1]
-}
-
-
-
-var cleanFileName = (name: string) => {
-  return name.split("/").slice(-1).pop()!
-}
-
-var cleanFolderName = (name: string) => {
-  return name.slice(0, -1).split("/").slice(-1).pop()!
-}
-
-// taken from https://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable-string
-var humanFileSize = (bytes: number, si = false, dp = 1) => {
-  const thresh = si ? 1000 : 1024;
-
-  if (Math.abs(bytes) < thresh) {
-    return bytes + ' B';
-  }
-
-  const units = si
-    ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-    : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-  let u = -1;
-  const r = 10 ** dp;
-
-  do {
-    bytes /= thresh;
-    ++u;
-  } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
-
-
-  return bytes.toFixed(dp) + ' ' + units[u];
-}
-
-
-
-
 // async function getdirs(path:string) {
 
 //   return 0;
 // }
 
 
-const Head: FC = (props: Props) => {
+// const Head: FC = (props: Props) => {
 
 
-  return <head>
+//   return <head>
 
-    <meta charSet="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      {props.cssstring}
-    </style>
-
-    {props.children}
-
-  </head>
+//     <meta charSet="utf-8" />
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
+//     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+//     <script src="https://cdn.tailwindcss.com"></script>
+//     <style>
+//       {props.cssstring}
+//     </style>
 
-}
+//     {props.children}
+
+//   </head>
 
 
 
-const Body: FC = (props: Props) => {
-  return <body className="md:mx-5 mt-5 flex flex-col items-start	 gap-2  min-h-full">
+// }
 
 
-    {props.children}
-  </body>
-}
+
+// const Body: FC = (props: Props) => {
+//   return <body className="md:mx-5 mt-5 flex flex-col items-start	 gap-2  min-h-full">
+
+
+//     {props.children}
+//   </body>
+// }
 
 
 
@@ -136,30 +97,15 @@ const Html: FC = (props: Props) => {
 
 
 
-const NotFound:FC  = () => {
-  return (<Html>
-<Head>
-</Head>
-<body>
-
-    <div className="flex flex-col items-center justify-center h-screen">
-      {/* <ExclamationCircleIcon className="text-red-600 h-24 w-24 mb-4" /> */}
-      <h1 className="text-4xl font-bold text-gray-800">404 - Not Found</h1>
-      <p className="text-gray-600 mt-4 mb-40">The page you are looking for does not exist.</p>
-    </div>
-</body>
-</Html>
-  )
-}
 
 
 
 
-const Footer: FC = (props: Props) => {
-  return <footer className="bg-gray-800 text-white p-5 text-center ">
-    <p>Powered by Cloudflare Workers, Daisyui CSS Framework, and Tailwind CSS</p>
-  </footer>
-}
+// const Footer: FC = (props: Props) => {
+//   return <footer className="bg-gray-800 text-white p-5 text-center ">
+//     <p>Powered by Cloudflare Workers, Daisyui CSS Framework, and Tailwind CSS</p>
+//   </footer>
+// }
 
 async function listBucket(bucket: R2Bucket, options?: R2ListOptions): Promise<R2Objects> {
   // List all objects in the bucket, launch new request if list is truncated
