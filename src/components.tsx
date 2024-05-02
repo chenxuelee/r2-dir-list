@@ -11,6 +11,9 @@ const Head: FC = (props: Props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.tailwindcss.com"></script>
+
+        <script src="https://kit.fontawesome.com/6f1b9806e2.js" crossorigin="anonymous"></script>
+
         {props.children}
     </head>;
 };

@@ -190,10 +190,19 @@ app.get("*", async (c: Context) => {
 
             </header>
 
-            <main className="flex ">
+            <main className="">
+           {index.objects.map((m)=>{
+            let str = JSON.stringify(m.httpMetadata)
+            console.log(str)
+return <p>
+  {m.httpMetadata}
+</p>
 
+           })}
 
             </main>
+            
+
             {/* <div>{index.delimitedPrefixes.map((m)=>
             {return <p>{m}</p>}
             )}</div> */}
