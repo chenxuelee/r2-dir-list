@@ -10,9 +10,11 @@ import { memo } from "hono/jsx";
 import { Props } from "hono/dist/types/jsx/base";
 
 
-import { createContext, useContext } from 'hono/jsx'
 
-import { NotFound } from "./components"
+import { createContext, useContext } from "hono/jsx"
+
+import { Footer, Head, NotFound } from "./components"
+import { cleanTitle } from './render';
 
 // import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
 // import { css, cx, keyframes, Style } from 'hono/css'
@@ -28,7 +30,26 @@ import { NotFound } from "./components"
 
 
 
+
+const data = {
+  files: [],
+  dirs: []
+}
+
+const Datacontext = createContext(data);
+
+const Datatable:FC = () => {
+        const datas = useContext(Datacontext)
+
+        return <table></table>
+
+
+}
+
+
 const app = new Hono()
+
+
 
 app.use("*", logger())
 
@@ -44,44 +65,7 @@ app.use("*", logger())
 
 
 
-// async function getdirs(path:string) {
 
-//   return 0;
-// }
-
-
-// const Head: FC = (props: Props) => {
-
-
-//   return <head>
-
-//     <meta charSet="utf-8" />
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-//     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-//     <script src="https://cdn.tailwindcss.com"></script>
-//     <style>
-//       {props.cssstring}
-//     </style>
-
-//     {props.children}
-
-//   </head>
-
-
-
-// }
-
-
-
-// const Body: FC = (props: Props) => {
-//   return <body className="md:mx-5 mt-5 flex flex-col items-start	 gap-2  min-h-full">
-
-
-//     {props.children}
-//   </body>
-// }
 
 
 
@@ -236,6 +220,38 @@ app.notFound((c) => {
 //   )
 
 // })
+
+
+
+app.get("*", async (c: Context) => {
+
+  const req = c.req; 
+  const url = new URL(req.url);
+
+  const domain = url.hostname;
+  const path = url.pathname;
+
+  const Page: FC = () =>
+    {
+
+      return <html lang="zh-CN">
+        <Head>
+          <title>
+            {cleanTitle(path)}
+          </title>
+          <body>
+           <Footer></Footer> 
+          </body>
+        </Head>
+      </html>
+    }
+
+    return c.html(<Page></Page>)
+
+})
+
+
+
 
 
 app.get("*", async (c: Context) => {

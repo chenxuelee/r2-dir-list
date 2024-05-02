@@ -20,7 +20,7 @@ const Head: FC = (props: Props) => {
 const Footer: FC = memo(
     () => {
 
-        return <footer>
+        return <footer className="flex justify-center text-xl my-2">
         <p> Powered by Cloudflare.</p>
         </footer>
 
