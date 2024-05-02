@@ -1,20 +1,23 @@
 // @ts-nocheck
 
-import { Hono, Context } from 'hono'
+import { Hono, Context } from "hono";
 
-import { logger } from "hono/logger"
-import type { FC } from "hono/jsx"
+import { logger } from "hono/logger";
+import type { FC } from "hono/jsx";
 
-import { R2Bucket, R2ListOptions, R2Objects, R2Object } from "@cloudflare/workers-types"
+import {
+  R2Bucket,
+  R2ListOptions,
+  R2Objects,
+  R2Object,
+} from "@cloudflare/workers-types";
 import { memo } from "hono/jsx";
 import { Props } from "hono/dist/types/jsx/base";
 
+import { createContext, useContext } from "hono/jsx";
 
-
-import { createContext, useContext } from "hono/jsx"
-
-import { Footer, Head, NotFound } from "./components"
-import { cleanTitle } from './render';
+import { Footer, Head, NotFound } from "./components";
+import { cleanTitle } from "./render";
 
 // import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
 // import { css, cx, keyframes, Style } from 'hono/css'
@@ -23,67 +26,28 @@ import { cleanTitle } from './render';
 
 // import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-
-
-
 // import { URL } from '@cloudflare/workers-types';
-
-
-
 
 const data = {
   files: [],
-  dirs: []
-}
+  dirs: [],
+};
 
 const Datacontext = createContext(data);
 
-const Datatable:FC = () => {
-        const datas = useContext(Datacontext)
+const Datatable: FC = () => {
+  const datas = useContext(Datacontext);
 
-        return <table></table>
+  return <table></table>;
+};
 
+const app = new Hono();
 
-}
-
-
-const app = new Hono()
-
-
-
-app.use("*", logger())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use("*", logger());
 
 const Html: FC = (props: Props) => {
-
-  return <html lang="en-US">
-    {props.children}
-  </html>
-
-}
-
-
-
-
-
-
-
+  return <html lang="en-US">{props.children}</html>;
+};
 
 // const Footer: FC = (props: Props) => {
 //   return <footer className="bg-gray-800 text-white p-5 text-center ">
@@ -91,7 +55,10 @@ const Html: FC = (props: Props) => {
 //   </footer>
 // }
 
-async function listBucket(bucket: R2Bucket, options?: R2ListOptions): Promise<R2Objects> {
+async function listBucket(
+  bucket: R2Bucket,
+  options?: R2ListOptions
+): Promise<R2Objects> {
   // List all objects in the bucket, launch new request if list is truncated
   var objects: R2Object[] = [];
   var delimitedPrefixes: string[] = [];
@@ -119,18 +86,14 @@ async function listBucket(bucket: R2Bucket, options?: R2ListOptions): Promise<R2
   return {
     objects,
     delimitedPrefixes,
-    truncated: false
+    truncated: false,
   };
 }
 
-
-
-
 app.notFound((c) => {
-  c.status(404)
-  return c.html(<NotFound />)
-}
-)
+  c.status(404);
+  return c.html(<NotFound />);
+});
 
 // const Datatable: FC = async (props) => {
 
@@ -144,17 +107,13 @@ app.notFound((c) => {
 
 //     const objectKey = path.slice(1);
 
-//     const bucket =props.bucket 
-
-
+//     const bucket =props.bucket
 
 //     const options: R2ListOptions = {
 //       prefix: objectKey,
 //       delimiter: '/',
 //       include: ['httpMetadata', 'customMetadata']
 //     }
-
-
 
 //     const index = await listBucket(bucket, options);
 
@@ -163,21 +122,9 @@ app.notFound((c) => {
 
 // }
 
-
-
-
 // const Notfound: FC = () => {
 
-
-
-
 // }
-
-
-
-
-
-
 
 // app.get("/", (c) => {
 
@@ -185,12 +132,9 @@ app.notFound((c) => {
 //     <Html>
 //       <Head cssstring={cssStyles}>
 
-
 //       </Head>
 
 //       <Body>
-
-
 
 //         <nav class="breadcrumbs text-lg">
 //           <ul>
@@ -201,11 +145,9 @@ app.notFound((c) => {
 //           </ul>
 //         </nav>
 
-
 //         <div className=" w-full min-h-96">
 
 //         </div>
-
 
 //         <div className="w-full  flex flex-1 justify-end flex-col mb-8">
 //           <Footer />
@@ -213,50 +155,14 @@ app.notFound((c) => {
 
 //       </Body>
 
-
 //     </Html>
-
 
 //   )
 
 // })
 
-
-
 app.get("*", async (c: Context) => {
-
-  const req = c.req; 
-  const url = new URL(req.url);
-
-  const domain = url.hostname;
-  const path = url.pathname;
-
-  const Page: FC = () =>
-    {
-
-      return <html lang="zh-CN">
-        <Head>
-          <title>
-            {cleanTitle(path)}
-          </title>
-          <body>
-           <Footer></Footer> 
-          </body>
-        </Head>
-      </html>
-    }
-
-    return c.html(<Page></Page>)
-
-})
-
-
-
-
-
-app.get("*", async (c: Context) => {
-
-  const req = c.req; 
+  const req = c.req;
   const url = new URL(req.url);
 
   const domain = url.hostname;
@@ -265,19 +171,64 @@ app.get("*", async (c: Context) => {
   const objectKey = path.slice(1);
 
   const bucket = c.env.BUCKET_monolibrary;
-  console.log(objectKey)
+  console.log(objectKey);
 
-  console.log(bucket)
+  console.log(bucket);
   const index = await listBucket(bucket, {
     prefix: objectKey,
-    delimiter: '/',
-    include: ['httpMetadata', 'customMetadata']
+    delimiter: "/",
+    include: ["httpMetadata", "customMetadata"],
+  });
+
+  const Page: FC = () => {
+    return (
+      <html lang="zh-CN">
+        <Head>
+          <title>{cleanTitle(path)}</title>
+          <body>
+            <header>
+
+            </header>
+
+            <main className="flex ">
+
+
+            </main>
+            {/* <div>{index.delimitedPrefixes.map((m)=>
+            {return <p>{m}</p>}
+            )}</div> */}
+            <Footer></Footer>
+          </body>
+        </Head>
+      </html>
+    );
+  };
+
+  return c.html(<Page></Page>);
 });
 
+app.get("*", async (c: Context) => {
+  const req = c.req;
+  const url = new URL(req.url);
 
-console.log(index.delimitedPrefixes.length)
+  const domain = url.hostname;
+  const path = url.pathname;
+  // remove the leading '/'
+  const objectKey = path.slice(1);
 
-console.log(index.objects.length)
+  const bucket = c.env.BUCKET_monolibrary;
+  console.log(objectKey);
+
+  console.log(bucket);
+  const index = await listBucket(bucket, {
+    prefix: objectKey,
+    delimiter: "/",
+    include: ["httpMetadata", "customMetadata"],
+  });
+
+  console.log(index.delimitedPrefixes.length);
+
+  console.log(index.objects.length);
 
   // console.log(url)
 
@@ -285,23 +236,7 @@ console.log(index.objects.length)
   // console.log(path)
   // console.log(objectKey)
 
+  return c.notFound();
+});
 
-
-
-
-
-
-  return c.notFound()
-
-
-
-}
-)
-
-
-
-
-
-
-
-export default app
+export default app;
